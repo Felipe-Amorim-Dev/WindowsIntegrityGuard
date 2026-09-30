@@ -1,0 +1,6 @@
+[submodule "service"]
+	path = service
+	url = https://github.com/Felipe-Amorim-Dev/WindowsIntegrityGuard-Service.git
+[submodule "ui"]
+	path = ui
+	url = https://github.com/Felipe-Amorim-Dev/WindowsIntegrityGuard-UI.git
