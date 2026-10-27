@@ -42,6 +42,18 @@ git submodule update --init --recursive
 - [WindowsIntegrityGuard-Service](https://github.com/Felipe-Amorim-Dev/WindowsIntegrityGuard-Service) — Serviço de integridade
 - [WindowsIntegrityGuard-UI](https://github.com/Felipe-Amorim-Dev/WindowsIntegrityGuard-UI) — Interface WPF
 
+## 🏗️ Arquitetura e componentes
+
+- Repositório agregador: service e ui são submódulos Git.
+- Service contém Core (contratos e lógica), host Windows Service, testes e comunicação IPC.
+- UI contém interface WPF, ViewModels e cliente Named Pipes.
+
+### Fluxo técnico
+
+1. UI → Named Pipes → Service → scanner de integridade.
+2. O motor de reparo utiliza a classificação do resultado e autorização antes de solicitar SFC/DISM.
+3. Resultados e estado do serviço são apresentados na interface.
+
 <a id="licenca"></a>
 ## 📄 Licença
 
