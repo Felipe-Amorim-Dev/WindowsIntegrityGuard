@@ -1,54 +1,57 @@
-# Windows Integrity Guard
+<h1 align="center">🛡️ Windows Integrity Guard</h1>
 
-Projeto pessoal em .NET para verificar a integridade de componentes importantes do Windows e, quando autorizado, conduzir um processo de reparo controlado.
+<p align="center"><em>Verificação de integridade do Windows com serviço e interface independentes.</em></p>
 
-**Estado atual:** protótipo em desenvolvimento. A existência de testes de unidade não significa que o serviço esteja validado para reparar computadores em uso.
+<p align="center">🇧🇷 Português | 🇺🇸 <a href="README.en.md">English</a></p>
 
-## Componentes
+<p align="center"><img src="https://img.shields.io/badge/licen%C3%A7a-MIT-006bed?style=flat-square" alt="MIT" /> <img src="https://img.shields.io/github/last-commit/Felipe-Amorim-Dev/WindowsIntegrityGuard?style=flat-square&color=006bed" alt="Last commit" /></p>
 
-```text
-WindowsIntegrityGuard (este repositório)
-├── service/ -> WindowsIntegrityGuard-Service
-│   ├── Core: regras e contratos
-│   ├── Service: execução e integração com Windows
-│   └── Tests: testes automatizados
-└── ui/ -> WindowsIntegrityGuard-UI
-    └── interface Windows em WPF
-```
+<p align="center"><a href="#sobre">Sobre</a> • <a href="#tecnologias">Tecnologias</a> • <a href="#como-rodar">Como rodar</a> • <a href="#licenca">Licença</a> • <a href="#autor">Autor</a></p>
 
-A UI apresenta as informações ao usuário; a lógica de validação e reparo fica no serviço. A integração completa entre os componentes ainda precisa de testes em Windows.
+---
 
-## Preparar o ambiente
+<a id="sobre"></a>
+## 📖 Sobre
 
-É necessário Windows 10/11, Visual Studio com desenvolvimento desktop .NET e SDK .NET compatível com os projetos. Use:
+Repositório agregador do Windows Integrity Guard. Utiliza submódulos Git para reunir o serviço .NET de integridade e a interface WPF. Os componentes são desenvolvidos em repositórios separados.
 
-```powershell
+## ✨ Funcionalidades
+
+- Organização do projeto em submódulos
+- Integração planejada entre serviço e interface
+
+## 🛠️ Tecnologias
+
+![C#](https://img.shields.io/badge/C%23-006bed?style=for-the-badge) ![.NET 9](https://img.shields.io/badge/.NET_9-006bed?style=for-the-badge) ![WPF](https://img.shields.io/badge/WPF-006bed?style=for-the-badge) ![Windows Services](https://img.shields.io/badge/Windows_Services-006bed?style=for-the-badge)
+
+## 📦 Pré-requisitos
+
+Windows e SDK .NET 9 (componentes de desktop .NET para WPF).
+
+<a id="como-rodar"></a>
+## 🚀 Como rodar
+
+```bash
 git clone --recurse-submodules https://github.com/Felipe-Amorim-Dev/WindowsIntegrityGuard.git
 cd WindowsIntegrityGuard
 git submodule update --init --recursive
 ```
 
-Abra a solução em `service/WindowsIntegrityGuard/WindowsIntegrityGuard.sln` para compilar e testar o serviço. Para a interface, consulte o arquivo de projeto disponível em `ui/WindowsIntegrityGuard.UI`.
+## 🔗 Repositórios relacionados
 
-## Fluxo previsto
+- [WindowsIntegrityGuard-Service](https://github.com/Felipe-Amorim-Dev/WindowsIntegrityGuard-Service) — Serviço de integridade
+- [WindowsIntegrityGuard-UI](https://github.com/Felipe-Amorim-Dev/WindowsIntegrityGuard-UI) — Interface WPF
 
-```text
-Solicitação do usuário
-      ↓
-Verificação de integridade
-      ↓
-Análise do resultado
-      ↓
-Se houver corrupção e houver autorização explícita:
-  executar recuperação controlada (SFC/DISM)
-      ↓
-Nova verificação e apresentação do resultado
-```
+<a id="licenca"></a>
+## 📄 Licença
 
-Os detalhes de instalação do serviço, permissões, comunicação UI/Service e recuperação de falhas continuam em revisão. Não executar em máquinas críticas nem automatizar SFC/DISM em produção sem ensaios em VM e backup.
+Distribuído sob a [licença MIT](LICENSE).
 
-## Desenvolvimento
+<a id="autor"></a>
+## 👤 Autor
 
-O [serviço](https://github.com/Felipe-Amorim-Dev/WindowsIntegrityGuard-Service) tem CI com compilação e testes. Veja o [resultado atual do workflow](https://github.com/Felipe-Amorim-Dev/WindowsIntegrityGuard-Service/actions/workflows/ci.yml). A [UI](https://github.com/Felipe-Amorim-Dev/WindowsIntegrityGuard-UI) ainda requer avaliação conjunta com o serviço.
+**Felipe Figueiredo Amorim** — Desenvolvedor Full Stack.
 
-Próximas etapas: integração completa, logs operacionais, empacotamento, validação de permissões, cenários de falha e testes em máquinas virtuais.
+[![LinkedIn](https://img.shields.io/badge/LinkedIn-Felipe%20Amorim-0A66C2?style=for-the-badge&logo=linkedin)](https://www.linkedin.com/in/felipe-amorim-dev/) [![E-mail](https://img.shields.io/badge/E--mail-contato-006bed?style=for-the-badge)](mailto:felipe.f.amorim@outlook.com)
+
+<p align="center"><strong>Obrigado por visitar! / Thanks for visiting!</strong></p>
