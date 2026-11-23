@@ -1,11 +1,12 @@
 $ErrorActionPreference = "Stop"
 
-$Root = Split-Path -Parent $PSScriptRoot
+$InstallerRoot = $PSScriptRoot
+$Root = Split-Path -Parent $InstallerRoot
 
 $ServiceProject = Join-Path $Root "service\WindowsIntegrityGuard\WindowsIntegrityGuard.Service\WindowsIntegrityGuard.Service.csproj"
 $UiProject = Join-Path $Root "ui\WindowsIntegrityGuard.UI\WindowsIntegrityGuard.UI\WindowsIntegrityGuard.UI.csproj"
 
-$PublishRoot = Join-Path $PSScriptRoot "publish"
+$PublishRoot = Join-Path $InstallerRoot "publish"
 $ServicePublish = Join-Path $PublishRoot "service"
 $UiPublish = Join-Path $PublishRoot "ui"
 
@@ -23,13 +24,10 @@ if (Test-Path $PublishRoot)
 New-Item -ItemType Directory -Path $ServicePublish -Force | Out-Null
 New-Item -ItemType Directory -Path $UiPublish -Force | Out-Null
 
-Write-Host "[1/3] Publicando Service..."
+Write-Host "[1/2] Publicando Service..."
+Write-Host "Projeto: $ServiceProject"
 
-dotnet publish $ServiceProject `
-    -c Release `
-    -r win-x64 `
-    --self-contained false `
-    -o $ServicePublish
+dotnet publish $ServiceProject -c Release -r win-x64 --self-contained false -o $ServicePublish
 
 if ($LASTEXITCODE -ne 0)
 {
@@ -37,13 +35,10 @@ if ($LASTEXITCODE -ne 0)
 }
 
 Write-Host ""
-Write-Host "[2/3] Publicando UI..."
+Write-Host "[2/2] Publicando UI..."
+Write-Host "Projeto: $UiProject"
 
-dotnet publish $UiProject `
-    -c Release `
-    -r win-x64 `
-    --self-contained false `
-    -o $UiPublish
+dotnet publish $UiProject -c Release -r win-x64 --self-contained false -o $UiPublish
 
 if ($LASTEXITCODE -ne 0)
 {
@@ -51,9 +46,13 @@ if ($LASTEXITCODE -ne 0)
 }
 
 Write-Host ""
-Write-Host "[3/3] Publicacao concluida."
+Write-Host "=========================================="
+Write-Host " Publicacao concluida!"
+Write-Host "=========================================="
 Write-Host ""
-Write-Host "Service: $ServicePublish"
-Write-Host "UI:      $UiPublish"
+Write-Host "Service:"
+Write-Host $ServicePublish
 Write-Host ""
-Write-Host "Agora compile WindowsIntegrityGuard.iss usando o Inno Setup."
+Write-Host "UI:"
+Write-Host $UiPublish
+Write-Host ""
